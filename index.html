@@ -285,30 +285,31 @@
     }
 
 
-    /* ── CORREÇÃO FINAL: LOGO PROPORCIONAL + RESPONSIVO ── */
-    nav{min-height:74px;gap:22px}
+    /* ── CORREÇÃO FINAL REAL: LOGO LIMPO, SEM SOBREPOSIÇÃO ── */
+    nav{min-height:78px;gap:22px;align-items:center}
     .nav-logo.logo-wrap{
       display:flex;
       flex-direction:column;
       align-items:flex-start;
       justify-content:center;
-      gap:5px;
+      gap:7px;
       color:var(--wh);
       text-decoration:none;
       min-width:0;
-      max-width:52vw;
+      max-width:58vw;
       line-height:1;
       position:relative;
+      overflow:visible;
     }
     .logo-title{
       display:flex;
       align-items:center;
-      gap:9px;
+      gap:10px;
       flex-wrap:wrap;
       font-family:var(--fd);
-      font-size:clamp(1.35rem,2.25vw,2.15rem);
+      font-size:clamp(1.55rem,2.45vw,2.45rem);
       letter-spacing:.11em;
-      line-height:.95;
+      line-height:1;
       white-space:normal;
     }
     .logo-title .orange{color:var(--or)}
@@ -316,23 +317,42 @@
       display:flex;
       align-items:center;
       gap:7px;
-      margin-left:78px;
-      padding:3px 12px 4px 10px;
-      border:1px solid rgba(224,123,0,.28);
+      margin:0;
+      padding:0;
+      border:none;
+      background:none;
+      box-shadow:none;
       font-family:var(--fc);
-      font-size:clamp(.58rem,.82vw,.78rem);
-      letter-spacing:.28em;
-      line-height:1.2;
+      font-size:clamp(.58rem,.84vw,.78rem);
+      letter-spacing:.26em;
+      line-height:1;
       color:var(--or);
-      opacity:.92;
+      opacity:.88;
       white-space:nowrap;
       max-width:100%;
       overflow:hidden;
       text-overflow:ellipsis;
-      background:linear-gradient(90deg,rgba(224,123,0,.055),transparent);
     }
-    .logo-dot{width:8px;height:8px;border-radius:50%;background:var(--or);box-shadow:0 0 14px rgba(224,123,0,.7);flex:0 0 auto;animation:bl 1.6s infinite}
-    .nav-logo.logo-wrap::after{content:'';position:absolute;left:0;right:12%;bottom:-8px;height:1px;background:linear-gradient(90deg,rgba(224,123,0,.45),transparent);opacity:.5}
+    .logo-dot{width:7px;height:7px;border-radius:50%;background:var(--or);box-shadow:0 0 14px rgba(224,123,0,.7);flex:0 0 auto;animation:bl 1.6s infinite}
+    .nav-logo.logo-wrap::after{display:none!important;content:none!important}
+
+    @media(max-width:1024px){
+      nav{min-height:72px}
+      .nav-logo.logo-wrap{max-width:64vw}
+      .logo-title{font-size:clamp(1.32rem,3vw,2rem);gap:8px}
+      .logo-sub{letter-spacing:.18em}
+    }
+    @media(max-width:640px){
+      nav{min-height:66px;padding:10px 5vw!important;align-items:center}
+      .nav-logo.logo-wrap{max-width:78vw;gap:5px}
+      .logo-title{font-size:1.18rem;gap:6px;letter-spacing:.075em;line-height:1;flex-wrap:nowrap}
+      .logo-sub{font-size:.50rem;letter-spacing:.10em;line-height:1.15;max-width:100%;white-space:nowrap}
+      .logo-dot{width:5px;height:5px}
+      #hero{height:auto!important;min-height:100svh!important;padding:96px 6vw 72px!important;justify-content:center!important}
+      .hero-car{width:118vw!important;right:-44vw!important;bottom:8%!important;opacity:.055!important}
+      .sec-title{line-height:.95}
+      .svc-card{min-height:auto}
+    }
 
     /* Motion extra de detail: reflexo fino nos cards */
     .svc-card .shine-line{position:absolute;inset:-60% auto auto -80%;width:35%;height:220%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),rgba(255,159,46,.12),transparent);transform:rotate(20deg);opacity:0;transition:opacity .2s;pointer-events:none}
