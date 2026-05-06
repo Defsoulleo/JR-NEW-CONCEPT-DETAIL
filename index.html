@@ -577,6 +577,42 @@
       .stat-l{font-size:.58rem!important;letter-spacing:.12em!important}
     }
 
+  
+
+    /* ── Correção de proporção dos botões dos pacotes ── */
+    .wheel-cta{
+      width:min(100%,230px) !important;
+      min-height:58px !important;
+      justify-content:center !important;
+      gap:12px !important;
+      padding:12px 20px 12px 12px !important;
+      white-space:nowrap !important;
+      text-align:center !important;
+      line-height:1 !important;
+    }
+    .wheel-cta::before{
+      width:36px !important;
+      height:36px !important;
+      flex:0 0 36px !important;
+    }
+    .svc-card.feat .wheel-cta{
+      width:min(100%,270px) !important;
+    }
+    @media(max-width:860px){
+      .wheel-cta,
+      .svc-card.feat .wheel-cta{
+        width:100% !important;
+        min-height:56px !important;
+        font-size:.72rem !important;
+        justify-content:center !important;
+      }
+      .wheel-cta::before{
+        width:32px !important;
+        height:32px !important;
+        flex-basis:32px !important;
+      }
+    }
+
   </style>
 </head>
 <body>
