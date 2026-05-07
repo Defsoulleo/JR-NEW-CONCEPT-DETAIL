@@ -613,6 +613,96 @@
       }
     }
 
+
+  /* ── CAR EXPLORER ── */
+  #explorer{padding:90px 5vw 80px;background:var(--dk);position:relative;overflow:hidden}
+  #explorer::before{content:'';position:absolute;top:-220px;left:50%;transform:translateX(-50%);width:900px;height:650px;background:radial-gradient(ellipse,rgba(224,123,0,.055),transparent 68%);pointer-events:none}
+  .explorer-header{text-align:center;margin-bottom:56px}
+  .explorer-header .sec-sub{max-width:480px;margin:14px auto 0}
+  .explorer-inner{display:grid;grid-template-columns:230px 1fr 250px;gap:34px;align-items:center;max-width:1280px;margin:0 auto}
+
+  /* Tabs */
+  .explorer-tabs{display:flex;flex-direction:column;gap:5px}
+  .etab-header{font-family:var(--fc);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--lgy);padding-left:4px;margin-bottom:10px}
+  .etab{display:flex;align-items:center;gap:12px;padding:13px 15px;background:transparent;border:1px solid rgba(255,255,255,.06);border-left:3px solid transparent;color:var(--gy);cursor:pointer;transition:border-color .25s,background .25s,color .25s;text-align:left;position:relative;overflow:hidden}
+  .etab::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(224,123,0,.08),transparent);opacity:0;transition:opacity .3s}
+  .etab:hover{border-color:rgba(224,123,0,.22);color:var(--wh)}.etab:hover::before{opacity:.6}
+  .etab.active{border-color:rgba(224,123,0,.18);border-left-color:var(--or);background:rgba(224,123,0,.055);color:var(--wh)}.etab.active::before{opacity:1}
+  .etab-num{font-family:var(--fd);font-size:1.55rem;color:rgba(255,255,255,.08);line-height:1;min-width:40px;transition:color .3s;flex-shrink:0}
+  .etab.active .etab-num{color:var(--or)}
+  .etab-name{font-family:var(--fc);font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;line-height:1.2}
+  .etab-cat{font-size:.66rem;color:var(--lgy);margin-top:2px;transition:color .3s}
+  .etab.active .etab-cat{color:rgba(224,123,0,.68)}
+  .etab-prog{position:absolute;bottom:0;left:0;height:2px;background:var(--or);width:0;transition:width linear}
+
+  /* Car wrap */
+  .explorer-car-wrap{position:relative;user-select:none}
+  .explorer-view-badge{position:absolute;top:0;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:7px;font-family:var(--fc);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--or);background:rgba(8,8,8,.88);border:1px solid rgba(224,123,0,.22);padding:5px 14px;white-space:nowrap;z-index:10;transition:all .4s ease}
+  .evb-dot{width:6px;height:6px;border-radius:50%;background:var(--or);flex-shrink:0;animation:evbBlink 1.8s infinite}
+  @keyframes evbBlink{0%,100%{opacity:1}50%{opacity:.12}}
+
+  /* SVGs */
+  .ecar-ext,.ecar-int{width:100%;height:auto;display:block;transition:opacity .55s ease}
+  .ecar-int{position:absolute;inset:0;top:0;opacity:0}
+
+  /* Zone classes */
+  .ez{transition:opacity .45s ease,filter .45s ease;opacity:.2;cursor:default}
+  .ez.ez-active{opacity:1;animation:ezGlow 2.6s ease-in-out infinite}
+  @keyframes ezGlow{0%,100%{filter:drop-shadow(0 0 9px rgba(224,123,0,.5))}50%{filter:drop-shadow(0 0 24px rgba(224,123,0,.92))}}
+  .ez.ez-dim{opacity:.06;filter:none}
+  .ez.ez-active .ez-draw{stroke-dasharray:4000;stroke-dashoffset:4000;animation:drawOut 1.3s ease forwards}
+  @keyframes drawOut{to{stroke-dashoffset:0}}
+  .ez.ez-active .ez-glass{animation:glassIn .7s ease forwards}
+  @keyframes glassIn{from{opacity:0}to{opacity:1}}
+
+  .iz{transition:opacity .5s ease,filter .5s ease;opacity:0}
+  .iz.iz-active{opacity:1;animation:izGlow 2.8s ease-in-out infinite}
+  @keyframes izGlow{0%,100%{filter:drop-shadow(0 0 8px rgba(224,123,0,.42))}50%{filter:drop-shadow(0 0 20px rgba(224,123,0,.82))}}
+
+  /* Sweep effect */
+  .sweep-overlay{position:absolute;top:0;bottom:0;width:90px;background:linear-gradient(90deg,transparent,rgba(224,123,0,.32),transparent);pointer-events:none;opacity:0;filter:blur(2px);z-index:8}
+  .sweep-overlay.sweeping{animation:sweepAcross .95s ease forwards}
+  @keyframes sweepAcross{from{left:-12%;opacity:0}15%{opacity:1}85%{opacity:1}to{left:112%;opacity:0}}
+
+  /* Particles */
+  .bubble,.steam-p{position:absolute;border-radius:50%;pointer-events:none;animation:bubRise linear forwards}
+  .bubble{background:rgba(255,255,255,.55)}
+  .steam-p{background:rgba(190,230,255,.38);filter:blur(2px)}
+  @keyframes bubRise{from{opacity:.75;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-38px) scale(.2)}}
+
+  /* Info panel */
+  .explorer-info{position:relative;min-height:300px}
+  .einfo{position:absolute;inset:0;opacity:0;transform:translateX(10px);transition:opacity .38s ease,transform .38s ease;pointer-events:none;display:flex;flex-direction:column;gap:13px}
+  .einfo.active{opacity:1;transform:translateX(0);pointer-events:auto;position:relative}
+  .einfo-eyebrow{font-family:var(--fc);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--or);display:flex;align-items:center;gap:8px}
+  .einfo-eyebrow::before{content:'';width:22px;height:1.5px;background:var(--or);flex-shrink:0}
+  .einfo-title{font-family:var(--fd);font-size:2.3rem;line-height:1.02}
+  .einfo-view{display:inline-flex;align-items:center;gap:7px;font-family:var(--fc);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--or);background:rgba(224,123,0,.09);border:1px solid rgba(224,123,0,.2);padding:5px 12px;width:fit-content}
+  .einfo-zones{display:flex;flex-wrap:wrap;gap:6px}
+  .eztag{font-family:var(--fc);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blk);background:var(--or);padding:3px 9px;border-radius:1px;opacity:.88}
+  .einfo-list{list-style:none}
+  .einfo-list li{font-size:.82rem;font-weight:300;color:var(--gy);padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:9px}
+  .einfo-list li::before{content:'';width:5px;height:5px;background:var(--or);border-radius:50%;flex-shrink:0}
+  .einfo-price-lbl{font-family:var(--fc);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--lgy)}
+  .einfo-price{font-family:var(--fd);font-size:2rem;color:var(--or);line-height:1}
+
+  /* Explorer mobile */
+  @media(max-width:1024px){
+    .explorer-inner{grid-template-columns:1fr;gap:24px}
+    .explorer-tabs{flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:4px;scrollbar-width:none}
+    .explorer-tabs::-webkit-scrollbar{display:none}
+    .etab{flex-direction:column;align-items:flex-start;gap:4px;min-width:118px;flex-shrink:0;border-left:none;border-bottom:3px solid transparent}
+    .etab.active{border-bottom-color:var(--or);border-left-color:transparent}
+    .einfo{position:relative;opacity:1;transform:none;display:none}
+    .einfo.active{display:flex;position:relative}
+  }
+  @media(max-width:640px){
+    #explorer{padding:55px 5vw 60px}
+    .einfo-title{font-size:1.9rem}
+    .einfo-price{font-size:1.7rem}
+    .explorer-view-badge{font-size:.55rem;padding:4px 10px}
+  }
+
   </style>
 </head>
 <body>
@@ -701,6 +791,296 @@
     <span>São José dos Campos</span><span class="dot">◆</span><span>JR Elite</span><span class="dot">◆</span>
   </div>
 </div>
+
+<!-- ── CAR EXPLORER ── -->
+<section id="explorer">
+  <div class="explorer-header reveal">
+    <div class="sec-label">Visualização interativa</div>
+    <h2 class="sec-title">EXPLORE OS<br/><span style="color:var(--or)">SERVIÇOS</span></h2>
+    <p class="sec-sub" style="margin:14px auto 0;text-align:center">Selecione o serviço e veja exatamente quais zonas do veículo são tratadas.</p>
+  </div>
+
+  <div class="explorer-inner">
+
+    <!-- TABS -->
+    <div class="explorer-tabs">
+      <div class="etab-header">SELECIONE</div>
+      <button class="etab active" data-svc="basic">
+        <span class="etab-num">01</span>
+        <div><div class="etab-name">MANUTENÇÃO</div><div class="etab-cat">Exterior básico</div></div>
+        <div class="etab-prog"></div>
+      </button>
+      <button class="etab" data-svc="externa">
+        <span class="etab-num">02</span>
+        <div><div class="etab-name">EXTERNA</div><div class="etab-cat">Exterior detalhado</div></div>
+        <div class="etab-prog"></div>
+      </button>
+      <button class="etab" data-svc="interna">
+        <span class="etab-num">03</span>
+        <div><div class="etab-name">INTERNA</div><div class="etab-cat">Interior completo</div></div>
+        <div class="etab-prog"></div>
+      </button>
+      <button class="etab" data-svc="higie">
+        <span class="etab-num">04</span>
+        <div><div class="etab-name">HIGIENIZAÇÃO</div><div class="etab-cat">Sanitização profunda</div></div>
+        <div class="etab-prog"></div>
+      </button>
+      <button class="etab" data-svc="elite">
+        <span class="etab-num">05</span>
+        <div><div class="etab-name">JR ELITE</div><div class="etab-cat">Experiência total</div></div>
+        <div class="etab-prog"></div>
+      </button>
+    </div>
+
+    <!-- CAR VISUALIZATION -->
+    <div class="explorer-car-wrap" id="explorerWrap">
+
+      <div class="explorer-view-badge" id="explorerBadge">
+        <div class="evb-dot"></div>
+        <span id="explorerBadgeText">VISÃO EXTERIOR</span>
+      </div>
+
+      <div class="sweep-overlay" id="sweepOverlay"></div>
+
+      <!-- EXTERIOR SVG -->
+      <svg class="ecar-ext" id="ecarExt" viewBox="0 0 960 445" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Ground shadow -->
+        <ellipse cx="468" cy="406" rx="326" ry="13" fill="rgba(224,123,0,.045)"/>
+        <!-- Base body (always visible faint) -->
+        <path d="M84 295 Q100 250 160 218 Q240 180 348 168 L426 152 Q486 140 564 142 L654 148 Q734 154 788 184 Q832 206 852 246 L862 282 Q844 294 822 297 L842 299 Q854 320 852 332 Q820 344 788 340 L768 330 Q752 352 716 364 Q680 374 656 357 L636 338 L254 338 L234 357 Q198 374 162 364 Q130 352 118 330 L100 338 Q70 338 62 320 Q56 302 68 292 Z"
+              stroke="rgba(224,123,0,.1)" stroke-width="1.5" fill="rgba(8,8,8,.4)"/>
+
+        <!-- ZONE: BODY (full silhouette) -->
+        <g id="ez-body" class="ez">
+          <path class="ez-draw" d="M84 295 Q100 250 160 218 Q240 180 348 168 L426 152 Q486 140 564 142 L654 148 Q734 154 788 184 Q832 206 852 246 L862 282 Q844 294 822 297 L842 299 Q854 320 852 332 Q820 344 788 340 L768 330 Q752 352 716 364 Q680 374 656 357 L636 338 L254 338 L234 357 Q198 374 162 364 Q130 352 118 330 L100 338 Q70 338 62 320 Q56 302 68 292 Z"
+                stroke="#E07B00" stroke-width="2.5" fill="rgba(224,123,0,.022)"/>
+        </g>
+
+        <!-- ZONE: HOOD (front section) -->
+        <g id="ez-hood" class="ez">
+          <path class="ez-draw" d="M84 295 Q100 250 160 218 Q222 186 296 172 L360 164 L344 252 Q280 260 218 274 Q148 285 90 295 Z"
+                stroke="#E07B00" stroke-width="2" fill="rgba(224,123,0,.06)"/>
+        </g>
+
+        <!-- ZONE: WINDSHIELD -->
+        <g id="ez-windshield" class="ez">
+          <path class="ez-glass" d="M334 170 Q368 134 424 122 L426 152 L360 164 Z"
+                stroke="#6EC6FF" stroke-width="1.5" fill="rgba(180,220,255,.06)"/>
+          <path d="M342 168 Q374 138 418 128 L420 148 L364 160 Z" fill="rgba(140,200,255,.06)"/>
+        </g>
+
+        <!-- ZONE: SIDE WINDOWS -->
+        <g id="ez-windows" class="ez">
+          <path class="ez-glass" d="M362 166 L426 152 Q486 140 564 142 L654 148 L656 172 Q572 166 492 166 Q428 166 364 174 Z"
+                stroke="#6EC6FF" stroke-width="1.5" fill="rgba(180,220,255,.06)"/>
+          <line x1="458" y1="154" x2="452" y2="172" stroke="rgba(110,198,255,.28)" stroke-width="1"/>
+          <line x1="560" y1="152" x2="556" y2="170" stroke="rgba(110,198,255,.28)" stroke-width="1"/>
+        </g>
+
+        <!-- ZONE: REAR WINDOW -->
+        <g id="ez-rearwindow" class="ez">
+          <path class="ez-glass" d="M656 172 L654 148 Q702 154 738 174 Q762 188 776 208 L742 222 Q714 198 684 180 Z"
+                stroke="#6EC6FF" stroke-width="1.5" fill="rgba(180,220,255,.06)"/>
+        </g>
+
+        <!-- ZONE: ROOF -->
+        <g id="ez-roof" class="ez">
+          <path class="ez-draw" d="M362 168 L426 152 Q486 140 564 142 L654 148 L654 170 Q572 164 492 164 Q428 164 364 172 Z"
+                stroke="#E07B00" stroke-width="2" fill="rgba(224,123,0,.07)"/>
+        </g>
+
+        <!-- ZONE: REAR SECTION -->
+        <g id="ez-rear" class="ez">
+          <path class="ez-draw" d="M654 148 Q734 154 788 184 Q832 206 852 246 L862 282 Q844 294 822 297 L842 299 Q854 320 852 332 Q820 344 788 340 L768 330 L756 274 Q734 228 690 206 Q670 197 654 190 Z"
+                stroke="#E07B00" stroke-width="2" fill="rgba(224,123,0,.05)"/>
+          <!-- Tail light -->
+          <rect x="848" y="257" width="15" height="18" rx="2" stroke="#FF9F2E" stroke-width="1.5" fill="rgba(255,100,0,.18)"/>
+        </g>
+
+        <!-- ZONE: GRILLE / FRONT BUMPER -->
+        <g id="ez-grille" class="ez">
+          <path class="ez-draw" d="M68 292 Q60 302 58 314 L62 325 Q70 338 100 338 L118 330"
+                stroke="#E07B00" stroke-width="2" fill="none"/>
+          <!-- Grille slats -->
+          <line x1="62" y1="302" x2="82" y2="284" stroke="#E07B00" stroke-width="1.5" opacity=".85"/>
+          <line x1="59" y1="312" x2="80" y2="296" stroke="#E07B00" stroke-width="1.5" opacity=".85"/>
+          <line x1="58" y1="322" x2="78" y2="308" stroke="#E07B00" stroke-width="1.5" opacity=".85"/>
+          <!-- Headlight -->
+          <path class="ez-draw" d="M84 295 Q74 302 67 312 Q72 304 80 299 Z"
+                stroke="#FF9F2E" stroke-width="2" fill="rgba(255,159,46,.22)"/>
+          <path d="M62 326 Q68 336 100 338" stroke="#E07B00" stroke-width="3" fill="none" opacity=".6"/>
+        </g>
+
+        <!-- ZONE: FRONT WHEEL -->
+        <g id="ez-frontwheel" class="ez">
+          <circle class="ez-draw" cx="200" cy="340" r="56" stroke="#E07B00" stroke-width="2.5" fill="rgba(224,123,0,.03)"/>
+          <circle cx="200" cy="340" r="35" stroke="#E07B00" stroke-width="1.5" fill="none" opacity=".55"/>
+          <circle cx="200" cy="340" r="18" stroke="#E07B00" stroke-width="1" fill="rgba(224,123,0,.09)" opacity=".7"/>
+          <line x1="200" y1="284" x2="200" y2="396" stroke="#E07B00" stroke-width="1" opacity=".38"/>
+          <line x1="152" y1="314" x2="248" y2="366" stroke="#E07B00" stroke-width="1" opacity=".38"/>
+          <line x1="152" y1="366" x2="248" y2="314" stroke="#E07B00" stroke-width="1" opacity=".38"/>
+          <path d="M150 294 Q176 276 200 274 Q224 276 250 294" stroke="rgba(224,123,0,.45)" stroke-width="1.5" fill="none"/>
+        </g>
+
+        <!-- ZONE: REAR WHEEL -->
+        <g id="ez-rearwheel" class="ez">
+          <circle class="ez-draw" cx="716" cy="340" r="56" stroke="#E07B00" stroke-width="2.5" fill="rgba(224,123,0,.03)"/>
+          <circle cx="716" cy="340" r="35" stroke="#E07B00" stroke-width="1.5" fill="none" opacity=".55"/>
+          <circle cx="716" cy="340" r="18" stroke="#E07B00" stroke-width="1" fill="rgba(224,123,0,.09)" opacity=".7"/>
+          <line x1="716" y1="284" x2="716" y2="396" stroke="#E07B00" stroke-width="1" opacity=".38"/>
+          <line x1="668" y1="314" x2="764" y2="366" stroke="#E07B00" stroke-width="1" opacity=".38"/>
+          <line x1="668" y1="366" x2="764" y2="314" stroke="#E07B00" stroke-width="1" opacity=".38"/>
+          <path d="M662 294 Q688 276 716 274 Q742 276 768 294" stroke="rgba(224,123,0,.45)" stroke-width="1.5" fill="none"/>
+        </g>
+
+        <!-- Door lines -->
+        <line x1="426" y1="170" x2="420" y2="330" stroke="rgba(224,123,0,.1)" stroke-width="1"/>
+        <line x1="560" y1="168" x2="556" y2="330" stroke="rgba(224,123,0,.1)" stroke-width="1"/>
+        <!-- Emblem -->
+        <circle cx="764" cy="234" r="11" stroke="rgba(224,123,0,.25)" stroke-width="1.5" fill="none"/>
+        <path d="M758 234 L770 234 M764 228 L764 240" stroke="rgba(224,123,0,.25)" stroke-width="1"/>
+      </svg>
+
+      <!-- INTERIOR OVERLAY SVG -->
+      <svg class="ecar-int" id="ecarInt" viewBox="0 0 960 445" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Darkened body (cutaway look) -->
+        <path d="M84 295 Q100 250 160 218 Q240 180 348 168 L426 152 Q486 140 564 142 L654 148 Q734 154 788 184 Q832 206 852 246 L862 282 Q844 294 822 297 L842 299 Q854 320 852 332 Q820 344 788 340 L768 330 Q752 352 716 364 Q680 374 656 357 L636 338 L254 338 L234 357 Q198 374 162 364 Q130 352 118 330 L100 338 Q70 338 62 320 Q56 302 68 292 Z"
+              stroke="rgba(224,123,0,.2)" stroke-width="1.5" fill="rgba(8,8,8,.84)"/>
+        <!-- Windows (glassy cutaway) -->
+        <path d="M334 170 Q368 134 424 122 L656 170 L364 174 Z"
+              fill="rgba(150,200,255,.065)" stroke="rgba(150,200,255,.16)" stroke-width="1"/>
+        <!-- Wheels faint -->
+        <circle cx="200" cy="340" r="56" stroke="rgba(224,123,0,.16)" stroke-width="1.5" fill="none"/>
+        <circle cx="716" cy="340" r="56" stroke="rgba(224,123,0,.16)" stroke-width="1.5" fill="none"/>
+
+        <!-- IZ: FLOOR / CARPET -->
+        <g id="iz-carpet" class="iz">
+          <rect x="242" y="310" width="462" height="30" rx="3" stroke="#E07B00" stroke-width="1.5" fill="rgba(224,123,0,.08)"/>
+          <path d="M270 310 L270 340 M305 310 L305 340 M340 310 L340 340 M375 310 L375 340 M410 310 L410 340 M445 310 L445 340 M480 310 L480 340 M515 310 L515 340 M550 310 L550 340 M585 310 L585 340 M620 310 L620 340 M655 310 L655 340 M690 310 L690 340"
+                stroke="#E07B00" stroke-width="0.5" opacity=".22"/>
+        </g>
+
+        <!-- IZ: HEADLINER / CEILING -->
+        <g id="iz-ceiling" class="iz">
+          <path d="M364 172 L654 170 L650 196 L368 196 Z"
+                stroke="#E07B00" stroke-width="1.5" fill="rgba(224,123,0,.08)"/>
+          <!-- Ambient light strip -->
+          <line x1="424" y1="172" x2="424" y2="196" stroke="#FF9F2E" stroke-width="1" opacity=".38"/>
+          <line x1="544" y1="170" x2="544" y2="196" stroke="#FF9F2E" stroke-width="1" opacity=".38"/>
+          <line x1="484" y1="171" x2="484" y2="196" stroke="#FF9F2E" stroke-width="0.5" opacity=".22"/>
+        </g>
+
+        <!-- IZ: DASHBOARD -->
+        <g id="iz-dash" class="iz">
+          <path d="M288 310 L314 242 Q335 220 380 215 L440 215 L440 310 Z"
+                stroke="#E07B00" stroke-width="1.5" fill="rgba(224,123,0,.1)"/>
+          <rect x="318" y="216" width="82" height="24" rx="3" stroke="#E07B00" stroke-width="1" fill="rgba(224,123,0,.06)" opacity=".65"/>
+          <rect x="434" y="258" width="22" height="56" rx="3" stroke="#E07B00" stroke-width="1" fill="rgba(224,123,0,.09)"/>
+          <!-- Steering wheel -->
+          <circle cx="358" cy="272" r="33" stroke="#E07B00" stroke-width="2" fill="none"/>
+          <circle cx="358" cy="272" r="10" stroke="#E07B00" stroke-width="1.5" fill="rgba(224,123,0,.38)"/>
+          <line x1="358" y1="239" x2="358" y2="262" stroke="#E07B00" stroke-width="2"/>
+          <line x1="358" y1="282" x2="358" y2="305" stroke="#E07B00" stroke-width="2"/>
+          <line x1="325" y1="272" x2="348" y2="272" stroke="#E07B00" stroke-width="2"/>
+          <line x1="368" y1="272" x2="391" y2="272" stroke="#E07B00" stroke-width="2"/>
+        </g>
+
+        <!-- IZ: FRONT SEAT -->
+        <g id="iz-frontseat" class="iz">
+          <rect x="454" y="212" width="54" height="96" rx="7" stroke="#E07B00" stroke-width="1.5" fill="rgba(224,123,0,.09)"/>
+          <rect x="442" y="294" width="72" height="24" rx="5" stroke="#E07B00" stroke-width="1.5" fill="rgba(224,123,0,.09)"/>
+          <rect x="462" y="198" width="38" height="20" rx="9" stroke="#E07B00" stroke-width="1.5" fill="rgba(224,123,0,.11)"/>
+          <line x1="466" y1="228" x2="496" y2="228" stroke="#E07B00" stroke-width="0.8" opacity=".38"/>
+          <line x1="466" y1="244" x2="496" y2="244" stroke="#E07B00" stroke-width="0.8" opacity=".38"/>
+          <line x1="466" y1="260" x2="496" y2="260" stroke="#E07B00" stroke-width="0.8" opacity=".38"/>
+        </g>
+
+        <!-- IZ: REAR SEAT -->
+        <g id="iz-rearseat" class="iz">
+          <rect x="574" y="212" width="90" height="96" rx="7" stroke="#E07B00" stroke-width="1.5" fill="rgba(224,123,0,.09)"/>
+          <rect x="560" y="294" width="114" height="24" rx="5" stroke="#E07B00" stroke-width="1.5" fill="rgba(224,123,0,.09)"/>
+          <rect x="582" y="198" width="32" height="18" rx="8" stroke="#E07B00" stroke-width="1.5" fill="rgba(224,123,0,.11)"/>
+          <rect x="624" y="198" width="32" height="18" rx="8" stroke="#E07B00" stroke-width="1.5" fill="rgba(224,123,0,.11)"/>
+          <line x1="584" y1="228" x2="652" y2="228" stroke="#E07B00" stroke-width="0.8" opacity=".38"/>
+          <line x1="584" y1="248" x2="652" y2="248" stroke="#E07B00" stroke-width="0.8" opacity=".38"/>
+          <line x1="584" y1="268" x2="652" y2="268" stroke="#E07B00" stroke-width="0.8" opacity=".38"/>
+        </g>
+      </svg>
+
+    </div><!-- /explorer-car-wrap -->
+
+    <!-- INFO PANEL -->
+    <div class="explorer-info" id="explorerInfo">
+
+      <div class="einfo active" data-svc="basic">
+        <div class="einfo-eyebrow">Serviço básico</div>
+        <div class="einfo-title">LIMPEZA DE<br/>MANUTENÇÃO</div>
+        <div class="einfo-view"><span style="width:6px;height:6px;border-radius:50%;background:var(--or);display:inline-block;flex-shrink:0"></span>VISÃO EXTERIOR</div>
+        <div class="einfo-zones"><span class="eztag">Carroceria</span><span class="eztag">Rodas</span><span class="eztag">Vidros</span></div>
+        <ul class="einfo-list">
+          <li>Snow Foam + Enceramento</li><li>Aspiração interna</li>
+          <li>Plásticos e borrachas</li><li>Revitalização externa</li>
+        </ul>
+        <div class="einfo-price-lbl">A partir de</div>
+        <div class="einfo-price">R$ 86</div>
+      </div>
+
+      <div class="einfo" data-svc="externa">
+        <div class="einfo-eyebrow">Limpeza externa</div>
+        <div class="einfo-title">DETALHADA<br/>EXTERNA</div>
+        <div class="einfo-view"><span style="width:6px;height:6px;border-radius:50%;background:var(--or);display:inline-block;flex-shrink:0"></span>EXTERIOR — COMPLETO</div>
+        <div class="einfo-zones"><span class="eztag">Capô</span><span class="eztag">Teto</span><span class="eztag">Rodas</span><span class="eztag">Vidros</span><span class="eztag">Grade</span></div>
+        <ul class="einfo-list">
+          <li>Lavagem + Enceramento</li><li>Grades com pincel</li>
+          <li>Descontaminação da pintura</li><li>Emblemas detalhados</li>
+        </ul>
+        <div class="einfo-price-lbl">A partir de</div>
+        <div class="einfo-price">R$ 230</div>
+      </div>
+
+      <div class="einfo" data-svc="interna">
+        <div class="einfo-eyebrow">Limpeza interna</div>
+        <div class="einfo-title">DETALHADA<br/>INTERNA</div>
+        <div class="einfo-view"><span style="width:6px;height:6px;border-radius:50%;background:#6EC6FF;display:inline-block;flex-shrink:0"></span>VISÃO INTERIOR</div>
+        <div class="einfo-zones"><span class="eztag">Teto</span><span class="eztag">Bancos</span><span class="eztag">Carpete</span><span class="eztag">Painel</span></div>
+        <ul class="einfo-list">
+          <li>Limpeza de teto</li><li>Plásticos e painel</li>
+          <li>Carpete detalhado</li><li>Restauração de tapetes</li>
+        </ul>
+        <div class="einfo-price-lbl">A partir de</div>
+        <div class="einfo-price">R$ 207</div>
+      </div>
+
+      <div class="einfo" data-svc="higie">
+        <div class="einfo-eyebrow">Higienização</div>
+        <div class="einfo-title">HIGIENIZAÇÃO<br/>INTERNA</div>
+        <div class="einfo-view"><span style="width:6px;height:6px;border-radius:50%;background:#6EC6FF;display:inline-block;flex-shrink:0;animation:evbBlink 1s infinite"></span>INTERIOR PROFUNDO</div>
+        <div class="einfo-zones"><span class="eztag">Bancos</span><span class="eztag">Teto</span><span class="eztag">Carpete</span></div>
+        <ul class="einfo-list">
+          <li>Higienização dos bancos</li><li>Cofre e estepe</li>
+          <li>Limpeza do teto</li><li>Higienização do carpete</li>
+        </ul>
+        <div class="einfo-price-lbl">A partir de</div>
+        <div class="einfo-price">R$ 391</div>
+      </div>
+
+      <div class="einfo" data-svc="elite">
+        <div class="einfo-eyebrow">★ Premium</div>
+        <div class="einfo-title">PACOTE<br/>JR ELITE</div>
+        <div class="einfo-view" style="color:#FF9F2E;border-color:rgba(255,159,46,.3);background:rgba(255,159,46,.08)"><span style="width:6px;height:6px;border-radius:50%;background:#FF9F2E;display:inline-block;flex-shrink:0;animation:evbBlink 1s infinite"></span>EXTERIOR + INTERIOR</div>
+        <div class="einfo-zones"><span class="eztag" style="background:linear-gradient(90deg,#E07B00,#FF9F2E)">COMPLETO</span></div>
+        <ul class="einfo-list">
+          <li>Limpeza externa detalhada</li><li>Interior higienizado</li>
+          <li>Polimento profissional</li><li>Vitrificação de pinturas</li>
+        </ul>
+        <div class="einfo-price-lbl">A partir de</div>
+        <div class="einfo-price">R$ 1.450</div>
+      </div>
+
+    </div><!-- /explorer-info -->
+
+  </div><!-- /explorer-inner -->
+</section>
 
 <!-- ── SERVICES ── -->
 <section id="servicos">
@@ -1007,6 +1387,105 @@
       nl.style.cssText='display:flex;flex-direction:column;position:absolute;top:56px;left:0;right:0;background:rgba(8,8,8,.98);padding:22px 5vw;gap:18px;border-bottom:1px solid rgba(224,123,0,.15);z-index:99';
     }
   });
+
+  // ── CAR EXPLORER ──
+  const svcData={
+    basic:   {view:'ext', ext:['ez-body','ez-frontwheel','ez-rearwheel','ez-windows','ez-windshield'], int:[], effect:'foam',   badge:'VISÃO EXTERIOR'},
+    externa: {view:'ext', ext:['ez-body','ez-hood','ez-roof','ez-rear','ez-grille','ez-frontwheel','ez-rearwheel','ez-windshield','ez-windows','ez-rearwindow'], int:[], effect:'sweep', badge:'EXTERIOR — COMPLETO'},
+    interna: {view:'int', ext:[], int:['iz-carpet','iz-ceiling','iz-dash','iz-frontseat','iz-rearseat'], effect:'clean',  badge:'VISÃO INTERIOR'},
+    higie:   {view:'int', ext:[], int:['iz-ceiling','iz-frontseat','iz-rearseat','iz-carpet'], effect:'steam',  badge:'INTERIOR PROFUNDO'},
+    elite:   {view:'both',ext:['ez-body','ez-hood','ez-roof','ez-rear','ez-grille','ez-frontwheel','ez-rearwheel','ez-windshield','ez-windows','ez-rearwindow'], int:['iz-carpet','iz-ceiling','iz-dash','iz-frontseat','iz-rearseat'], effect:'elite',  badge:'EXTERIOR + INTERIOR'}
+  };
+
+  let curSvc='basic', userTouched=false, autoTmr=null;
+  const tabBtns=document.querySelectorAll('.etab');
+  const einfos=document.querySelectorAll('.einfo');
+  const ecarExt=document.getElementById('ecarExt');
+  const ecarInt=document.getElementById('ecarInt');
+  const badgeTxt=document.getElementById('explorerBadgeText');
+  const sweepEl=document.getElementById('sweepOverlay');
+  const explorerWrap=document.getElementById('explorerWrap');
+
+  function activateSvc(svc){
+    if(svc===curSvc) return;
+    curSvc=svc;
+    const d=svcData[svc];
+
+    // tabs
+    tabBtns.forEach(b=>b.classList.toggle('active',b.dataset.svc===svc));
+    // panels
+    einfos.forEach(ei=>ei.classList.toggle('active',ei.dataset.svc===svc));
+    // badge
+    badgeTxt.textContent=d.badge;
+
+    // clear zones
+    document.querySelectorAll('.ez').forEach(el=>el.classList.remove('ez-active','ez-dim'));
+    document.querySelectorAll('.iz').forEach(el=>el.classList.remove('iz-active'));
+
+    // exterior
+    if(d.view==='ext'||d.view==='both'){
+      ecarExt.style.opacity='1';
+      document.querySelectorAll('.ez').forEach(el=>{
+        if(d.ext.includes(el.id)) el.classList.add('ez-active');
+        else if(d.ext.length) el.classList.add('ez-dim');
+      });
+    } else {
+      ecarExt.style.opacity='0.18';
+      document.querySelectorAll('.ez').forEach(el=>el.classList.add('ez-dim'));
+    }
+
+    // interior
+    if(d.view==='int'||d.view==='both'){
+      ecarInt.style.opacity='1';
+      d.int.forEach(id=>{const el=document.getElementById(id);if(el)el.classList.add('iz-active');});
+    } else {
+      ecarInt.style.opacity='0';
+    }
+
+    // effect
+    triggerEffect(d.effect);
+  }
+
+  function triggerEffect(type){
+    sweepEl.classList.remove('sweeping');
+    void sweepEl.offsetWidth;
+    sweepEl.classList.add('sweeping');
+    if(type==='foam') spawnParticles(10,'bubble');
+    if(type==='steam'||type==='clean') spawnParticles(8,'steam-p');
+    if(type==='elite'){spawnParticles(8,'bubble');spawnParticles(6,'steam-p');}
+  }
+
+  function spawnParticles(n,cls){
+    for(let i=0;i<n;i++){
+      const p=document.createElement('div');
+      p.className=cls;
+      const sz=Math.random()*8+4;
+      p.style.cssText=`width:${sz}px;height:${sz}px;left:${15+Math.random()*70}%;bottom:${20+Math.random()*40}%;animation-duration:${.5+Math.random()*.85}s;animation-delay:${Math.random()*.55}s`;
+      explorerWrap.appendChild(p);
+      setTimeout(()=>p.remove(),1600);
+    }
+  }
+
+  tabBtns.forEach(b=>{
+    b.addEventListener('click',()=>{
+      userTouched=true;
+      clearInterval(autoTmr);
+      activateSvc(b.dataset.svc);
+    });
+  });
+
+  // auto-cycle on initial load (stops on user interaction)
+  const svcKeys=Object.keys(svcData);
+  let autoIdx=0;
+  function startCycle(){
+    autoTmr=setInterval(()=>{
+      if(userTouched){clearInterval(autoTmr);return;}
+      autoIdx=(autoIdx+1)%svcKeys.length;
+      activateSvc(svcKeys[autoIdx]);
+    },3600);
+  }
+  activateSvc('basic');
+  setTimeout(startCycle,2800);
 </script>
 </body>
 </html>
