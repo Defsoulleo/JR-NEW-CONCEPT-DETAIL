@@ -25,7 +25,7 @@
     .cring{width:34px;height:34px;border:1.5px solid var(--or);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:left .06s,top .06s}
 
     /* ── NAV ── */
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 5vw;background:linear-gradient(to bottom,rgba(8,8,8,.97),transparent);transition:background .4s,border .4s}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 5vw;background:rgba(8,8,8,.97);transition:background .4s,border .4s}
     nav.scrolled{background:rgba(8,8,8,.97);border-bottom:1px solid rgba(224,123,0,.18)}
     .nav-logo{font-family:var(--fd);font-size:1.4rem;letter-spacing:.1em;color:var(--wh);text-decoration:none}
     .nav-logo span{color:var(--or)}
@@ -452,9 +452,9 @@
       gap:11px!important;
       flex-wrap:nowrap!important;
       font-family:var(--fd)!important;
-      font-size:clamp(1.85rem,3.1vw,3rem)!important;
-      letter-spacing:.105em!important;
-      line-height:1.12!important;
+      font-size:clamp(2.1rem,3.6vw,3.5rem)!important;
+      letter-spacing:.12em!important;
+      line-height:1.1!important;
       margin:0!important;
       padding:0!important;
       white-space:nowrap!important;
@@ -468,11 +468,12 @@
       align-items:center!important;
       gap:8px!important;
       font-family:var(--fc)!important;
-      font-size:clamp(.62rem,.9vw,.82rem)!important;
+      font-size:clamp(.68rem,1vw,.9rem)!important;
+      font-weight:700!important;
       letter-spacing:.30em!important;
       line-height:1.2!important;
       color:var(--or)!important;
-      opacity:.9!important;
+      opacity:.95!important;
       margin:0!important;
       padding:0!important;
       border:0!important;
@@ -486,6 +487,7 @@
       position:relative!important;
       z-index:1!important;
       transform:none!important;
+      text-transform:uppercase!important;
     }
     nav#nav .logo-dot{
       width:7px!important;
@@ -500,13 +502,13 @@
     @media(max-width:860px){
       nav#nav{min-height:76px!important;padding:10px 5vw!important}
       nav#nav .nav-logo.logo-wrap{max-width:78vw!important;gap:7px!important}
-      nav#nav .logo-title{font-size:clamp(1.18rem,5vw,1.55rem)!important;letter-spacing:.075em!important;gap:7px!important;line-height:1.12!important}
-      nav#nav .logo-sub{font-size:clamp(.48rem,2.15vw,.62rem)!important;letter-spacing:.13em!important;line-height:1.15!important}
+      nav#nav .logo-title{font-size:clamp(1.25rem,5vw,1.65rem)!important;letter-spacing:.08em!important;gap:7px!important;line-height:1.12!important}
+      nav#nav .logo-sub{font-size:clamp(.52rem,2.15vw,.68rem)!important;letter-spacing:.14em!important;line-height:1.15!important}
       nav#nav .logo-dot{width:5px!important;height:5px!important;min-width:5px!important}
     }
     @media(max-width:380px){
-      nav#nav .logo-title{font-size:1.05rem!important;gap:5px!important;letter-spacing:.06em!important}
-      nav#nav .logo-sub{font-size:.45rem!important;letter-spacing:.09em!important}
+      nav#nav .logo-title{font-size:1.08rem!important;gap:5px!important;letter-spacing:.06em!important}
+      nav#nav .logo-sub{font-size:.48rem!important;letter-spacing:.09em!important}
     }
 
 
@@ -703,6 +705,74 @@
     .explorer-view-badge{font-size:.55rem;padding:4px 10px}
   }
 
+    /* ── LOGO MOTION ── */
+    /* Entrance: slide + fade in on load */
+    @keyframes logoEntrance{
+      from{opacity:0;transform:translateX(-18px) skewX(-4deg);letter-spacing:.22em}
+      to{opacity:1;transform:translateX(0) skewX(0);letter-spacing:.12em}
+    }
+    nav#nav .logo-title{animation:logoEntrance .9s cubic-bezier(.22,.8,.2,1) .1s both}
+
+    /* Shine sweep: metallic light crossing the text every ~5s */
+    nav#nav .logo-title{position:relative;overflow:hidden}
+    nav#nav .logo-title::after{
+      content:'';
+      position:absolute;
+      top:-30%;left:-80%;
+      width:55%;height:160%;
+      background:linear-gradient(
+        105deg,
+        transparent 30%,
+        rgba(255,255,255,.55) 48%,
+        rgba(255,220,120,.38) 52%,
+        transparent 70%
+      );
+      transform:skewX(-18deg);
+      animation:logoShine 5.5s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes logoShine{
+      0%,18%{left:-80%;opacity:0}
+      22%{opacity:1}
+      48%{left:140%;opacity:1}
+      52%,100%{left:140%;opacity:0}
+    }
+
+    /* Orange part: glow breath */
+    nav#nav .logo-title .orange{
+      color:var(--or)!important;
+      animation:logoOrangeGlow 3.2s ease-in-out infinite;
+    }
+    @keyframes logoOrangeGlow{
+      0%,100%{text-shadow:0 0 0 rgba(224,123,0,0)}
+      50%{text-shadow:0 0 22px rgba(255,159,46,.75),0 0 44px rgba(224,123,0,.35)}
+    }
+
+    /* White spans: subtle flicker of depth */
+    nav#nav .logo-title span:not(.orange){
+      animation:logoWhiteDepth 6s ease-in-out infinite;
+    }
+    nav#nav .logo-title span:nth-child(3){animation-delay:.7s}
+    @keyframes logoWhiteDepth{
+      0%,100%{text-shadow:none}
+      50%{text-shadow:0 0 14px rgba(255,255,255,.18)}
+    }
+
+    /* Hover: stretch spacing + intensify glow */
+    nav#nav .nav-logo.logo-wrap:hover .logo-title{letter-spacing:.16em!important;transition:letter-spacing .4s ease}
+    nav#nav .nav-logo.logo-wrap:hover .logo-title .orange{
+      text-shadow:0 0 28px rgba(255,159,46,.9),0 0 56px rgba(224,123,0,.5)!important;
+    }
+
+    /* Dot: sync pulse with orange glow */
+    nav#nav .logo-dot{
+      animation:bl 1.6s infinite, dotGlow 3.2s ease-in-out infinite!important;
+    }
+    @keyframes dotGlow{
+      0%,100%{box-shadow:0 0 8px rgba(224,123,0,.5)}
+      50%{box-shadow:0 0 20px rgba(255,159,46,.95),0 0 36px rgba(224,123,0,.45)}
+    }
+
   </style>
 </head>
 <body>
@@ -759,7 +829,6 @@
   </svg>
 
   <div class="hero-content">
-    <div class="hero-badge">Estética automotiva delivery · SJC</div>
     <h1 class="hero-h1">
       <span class="l1">LEVAMOS</span>
       <span class="l2">O PADRÃO</span>
