@@ -39,7 +39,8 @@
     .ham span{width:24px;height:2px;background:var(--wh);display:block}
 
     /* ── HERO ── */
-    #hero{position:relative;height:100vh;min-height:700px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 8vw;overflow:hidden}
+    #hero{position:relative;height:100vh;min-height:700px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 8vw;
+      padding-top:120px!important;overflow:hidden}
     .hero-lines{position:absolute;inset:0;z-index:0;overflow:hidden}
     .hero-lines span{position:absolute;height:1px;background:linear-gradient(to right,transparent,rgba(224,123,0,.28),transparent);animation:spd 3s linear infinite;opacity:0}
     @keyframes spd{0%{transform:translateX(-120%);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateX(110vw);opacity:0}}
@@ -427,10 +428,11 @@
 
     /* ── FIX DEFINITIVO DO LOGO: sem sobreposição em desktop e mobile ── */
     nav#nav{
-      min-height:92px!important;
-      padding-top:14px!important;
-      padding-bottom:14px!important;
+      min-height:74px!important;
+      padding:10px 5vw!important;
       align-items:center!important;
+      background:rgba(8,8,8,.98)!important;
+      backdrop-filter:blur(10px);
     }
     nav#nav .nav-logo.logo-wrap{
       display:flex!important;
@@ -452,9 +454,9 @@
       gap:11px!important;
       flex-wrap:nowrap!important;
       font-family:var(--fd)!important;
-      font-size:clamp(2.1rem,3.6vw,3.5rem)!important;
-      letter-spacing:.12em!important;
-      line-height:1.1!important;
+      font-size:clamp(1.55rem,2.6vw,2.6rem)!important;
+      letter-spacing:.10em!important;
+      line-height:1!important;
       margin:0!important;
       padding:0!important;
       white-space:nowrap!important;
